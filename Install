@@ -2,7 +2,7 @@ Some packages did not be included in the original environment that should be ins
 
 step 1: open the Anaconda Prompt
 
-step 2: enter conda install XXX(packages)
+step 2: enter conda install XXX(package name)
 
 ## there are some useful packages are able be used.
 # pandas-datareader
