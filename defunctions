@@ -1,0 +1,7 @@
+#Date recognition (only new date added)
+if datetime.datetime.now()>datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
+    for i in range(1,len(index)):
+        if datetime.datetime.strptime(index[i][0], "%b %d, %Y")> datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
+            for j in range(0,7):
+                ws.cell(row=i+1,column=j+1).value=index[i][j]
+                wb.save(filename = "INDEX.xlsx")
