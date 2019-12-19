@@ -1,7 +1,15 @@
 #Date recognition (only new date added)
-if datetime.datetime.now()>datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
-    for i in range(1,len(index)):
-        if datetime.datetime.strptime(index[i][0], "%b %d, %Y")> datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
-            for j in range(0,7):
-                ws.cell(row=i+1,column=j+1).value=index[i][j]
-                wb.save(filename = "INDEX.xlsx")
+def newdate();
+    if datetime.datetime.now()>datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
+        for i in range(1,len(index)):
+            if datetime.datetime.strptime(index[i][0], "%b %d, %Y")> datetime.datetime.strptime(ws[ws.max_row][0].value, "%b %d, %Y"):
+                for j in range(0,7):
+                    ws.cell(row=i+1,column=j+1).value=index[i][j]
+                    wb.save(filename = "INDEX.xlsx")
+                    
+#create excel and save data
+def datasave():
+    df = pd.DataFrame(index )#tranform data to pd frame
+    writer = pd.ExcelWriter("INDEX"+'.xlsx', engine='xlsxwriter') #create an excel file and write data(pd) into excel
+    df.to_excel(writer, sheet_name='DJI',header=False,index=False) #create a named sheet
+    writer.save() #save data
