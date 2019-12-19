@@ -1,2 +1,3 @@
-# DEVELOPMENT-PLAN
-This repository shows and describes  my programs under development
+# DEVELOPMENT PLAN
+This repository would describes my projects and programs under development
+
