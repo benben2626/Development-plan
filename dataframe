@@ -1,3 +1,11 @@
+import datetime as dt
+import matplotlib.pyplot as plt
+from matplotlib import style
+import pandas as pd
+import pandas_datareader.data as web
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+
 df.to_csv('XX.csv') #df text save to target csv
 
 df = pd.read_csv('xxx.csv', parse_dates=True, index_col=0) #circle column 0 t0 index
