@@ -6,8 +6,12 @@ import pandas_datareader.data as web
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-df.to_csv('XX.csv') #df text save to target csv
+style.use('ggplot')
+start = dt.datetime(2019,1,1)
+end = dt.datetime(2019,12,1)
 
+df = web.DataReader('xxx','yahoo',start,end)
+df.to_csv('XXx.csv') #df text save to target csv
 df = pd.read_csv('xxx.csv', parse_dates=True, index_col=0) #circle column 0 t0 index
 #condition(https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html)
 
