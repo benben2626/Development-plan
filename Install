@@ -2,7 +2,9 @@ Some packages did not be included in the original environment that should be ins
 
 step 1: open the Anaconda Prompt
 
-step 2: enter conda install XXX(package name)
+step 2: enter package name ex. conda or pip install matplotlib
+
 
 ## there are some useful packages are able be used.
 # pandas-datareader
+# install mpl-finance (only pip)
