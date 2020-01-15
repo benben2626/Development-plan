@@ -1,0 +1,58 @@
+#linear regression for random data
+import random
+from statistics import mean
+import numpy as np
+
+def create_dataset(hm,variance,step=2,correlation='pos'):
+    val = 1
+    ys = []
+    for i in range(hm):
+        y = val + random.randrange(-variance,variance) #random.randrange(random range)
+        ys.append(y)
+        if correlation and correlation == 'pos':
+            val+=step
+        elif correlation and correlation == 'neg':
+            val-=step
+    xs = [i for i in range(len(ys))]
+    return np.array(xs, dtype=np.float64),np.array(ys,dtype=np.float64)
+
+#hm(how many datapoints),variance(how much each point can vary from the previous point)
+#step(how far to step on average per point),correlation(False,pos,neg)
+
+def best_fit_slope_and_intercept(xs,ys):
+    m = (((mean(xs)*mean(ys)) - mean(xs*ys)) /
+         ((mean(xs)*mean(xs)) - mean(xs*xs)))
+    b = mean(ys)- m*mean(xs)
+    return m,b
+    
+def squared_error(ys_orig,ys_line): # ys_orig,ys_line = ys,regression_line
+    return sum((ys_line - ys_orig) * (ys_line - ys_orig))
+
+def coefficient_of_determination(ys_orig,ys_line): #R
+    y_mean_line = [mean(ys_orig) for y in ys_orig]
+    squared_error_regr = squared_error(ys_orig, ys_line) #regression predict error
+    squared_error_y_mean = squared_error(ys_orig, y_mean_line) #mean error
+    return 1 - (squared_error_regr/squared_error_y_mean)
+
+xs, ys = create_dataset(40,40,2,correlation='pos') #change variable effect R, +-correlation opposite directions
+m, b = best_fit_slope_and_intercept (xs,ys)
+regression_line = [m*x+b for x in xs]
+r_squared = coefficient_of_determination(ys,regression_line)
+print(r_squared)
+
+#squared error of the regression line  
+#r = "coefficient of determination" 
+# r*r = 1- (squared error of the regression line/squared error of the mean y line)
+#Squared errors = (regression y of (y=mx+b)-real y )^2
+#Mean squared error = average squared error
+
+------------------------------------------------------
+
+import matplotlib.pyplot as plt
+from matplotlib import style
+%matplotlib qt
+style.use('ggplot')
+plt.scatter(xs,ys,color='#003F72',label='data') #coordinate
+plt.plot(xs, regression_line, label='regression line') #xaxis=xs & yaxis=regression_line
+plt.legend(loc=4)
+plt.show()
